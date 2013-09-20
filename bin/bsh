@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -n "$ECB_HOME" ]; then
+		echo using $ECB_HOME
+else 
+	    echo ECB_HOME not set!
+	    exit 1
+fi
+
+export CLASSPATH=$ECB_HOME/lib/bsh-2.0b4.jar:$ECB_HOME/lib/jmathplot.jar:$ECB_HOME/lib/jmatharray.jar:out
+
+java bsh.Console
+

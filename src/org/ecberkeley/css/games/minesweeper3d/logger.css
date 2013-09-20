@@ -1,0 +1,53 @@
+
+#logger li {
+  border-top: 1px solid black; 
+  padding: 0px;
+  margin: 0px;
+  display: block;
+  line-height: 1.4;
+  white-space: pre;
+}
+#logger {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  bottom: 800px;
+  height: 800px;
+}
+.stylee{
+  background-color: #ccffcc; 
+  opacity: 0.85; 
+  border: 1px solid black;
+  height: 800px; 
+  width: 800px; 
+  overflow: scroll;  
+}
+.containerFloat {
+   position: relative; 
+   background: #ccc; 
+   background-color: #ccffcc; /* same as div inline style in logger */
+   z-index: 2000;
+}
+.logger-linenum {
+    font-size: 0.6em;
+    color: blue;
+}
+.logger-line {
+   font-size: 1em; 
+}
+.logger-delimiter {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: blue;
+}
+.logger-colon {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: orange ;
+}
+.logger-name{
+    color: #ff6600 ;
+}
+.logger.value {
+    color: black;
+}

@@ -1,0 +1,48 @@
+Coursework
+
+
+CSS 101 - Java in 5 Minutes
+
+   http://www2.thu.edu.tw/~wenwei/beanshellExamples.html
+   http://www2.thu.edu.tw/~wenwei/about.html
+   Depends on:
+   	http://www.jfree.org/jfreechart/
+   	    http://sourceforge.net/projects/jfreechart/files/1.%20JFreeChart/1.0.13/jfreechart-1.0.13.zip/download
+   	http://sourceforge.net/projects/jfreereport/
+   	http://www.beanshell.org/
+   	    http://beanshell.org/bsh-2.0b4.jar
+
+    Playing sound files:
+         http://www.dreamincode.net/forums/topic/14083-incredibly-easy-way-to-play-sounds/
+   	
+  Two important points.
+  	1.) The above code has been released with open source licenses.
+  	    The code in http://www2.thu.edu.tw/~wenwei has been released with a GNU General Public License,
+  	      otherwise known as the GPL.
+  	    The Beanshell code is dual licensed (you may pick one) under the "Sun Public License" or the
+  	    "Gnu Lesser Public License" (LGPL).
+  	    
+  	    These kinds of licenses mean you may download, use, modify, extend, and distribute the software,
+  	    as long as you don't charge for the implementation, and give notice of the original distributions,
+  	    sometimes also providing the full original distribution.
+  	    
+  	    There are many kinds of open source licenses and Creative Commons licenses.
+  	    
+  	    Discuss advantages.
+  	    
+    2.) The availability of these packages means you don't have to write this code.
+        Thus, it is faster and better to spend the time learning what someone else did, 
+        than to re-invent.  This fits well with CDC.  It also means that there is more
+        code re-use, which makes codebases stronger, more flexible, and more secure. 
+        Critical to this is that when you find bugs, or implement extensions, that you 
+        share them back to the creators of the software, and to the world.  It is a level 
+        of responsibility, but also of opportunity to learn and network.
+        
+ Setting up a basic script
+ ==================
+ echo -n "CP=.:" > setclasspath.sh
+ for jar in ../lib/* ; do  echo -n  "$jar:"; done >> setclasspath.sh
+ 
+ laramie@laramielap []    ~/doc.lar/projects/ecberkeley/departments/css/java5minutes/lib/statgraphics_beta1.4/examples
+$ javac -cp $CP:../statgraphics_beta1.4.jar *.java
+ 

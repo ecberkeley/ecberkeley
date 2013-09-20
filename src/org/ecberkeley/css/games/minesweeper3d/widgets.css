@@ -1,0 +1,25 @@
+.menuKeyLetter {
+    font-weight: bold; color: blue;
+}
+.instrument {font-size: 14pt; color: black; font-weight: normal; border: 1px solid green;  
+                  margin: 2px; font-family: "American Typewriter","Courier New", Courier;}
+
+.shadow{
+    -moz-box-shadow: -5px -5px 5px #888;
+    -webkit-box-shadow: -5px -5px 5px #888;
+    box-shadow: -5px -5px 5px #888;
+}
+.shadow2{
+    -moz-box-shadow: -1px -1px 12px 3px #888;
+    -webkit-box-shadow: -1px -1px 12px 3px #888;
+    box-shadow: -1px -1px 12px 3px #888;
+}
+.shadow3{
+    -moz-box-shadow: -2px -2px 4px 1px #AAA;
+    -webkit-box-shadow: -2px -2px 4px 1px #AAA;
+    box-shadow: -2px -2px 4px 1px #AAA;
+    /*                 x-pos, y-pos, shadow-spread/blur, outer-border-extent */
+}
+.pointer {
+    cursor: pointer;
+}

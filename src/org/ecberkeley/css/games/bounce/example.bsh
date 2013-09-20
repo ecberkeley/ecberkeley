@@ -1,0 +1,29 @@
+/*
+    works when you run from  $ECB_HOME
+    and execute $ECB_HOME/bin/bsh
+    then in the console, paste this line:
+    source("src/org/ecberkeley/css/games/bounce/example.bsh");
+*/
+addClassPath("out");
+addClassPath("lib");
+show();
+import org.ecberkeley.css.games.bounce.BBDemo;
+import org.ecberkeley.css.games.bounce.Ball;
+
+bbdemo = new org.ecberkeley.css.games.bounce.BBDemo();
+pnl = bbdemo.getBBPanel();
+
+//Add with DEFAULT_DIAMETER :
+pnl.addBall(0, 0, 2, 3);
+pnl.addBall(10, 10, 4, 6);
+
+//Add with custom diameter :
+Ball ball = new  Ball(15, 15, 10, 20);
+ball.setDiameter(50);
+pnl.addBall(ball);
+
+
+//Note that you can run two instances by sourcing the file twice.
+//  You can also run these commands singly after the whole file has been sourced.
+
+//Todo:   add gravity, change diameters, change diameter on the fly, change colors, add text...

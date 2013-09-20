@@ -1,0 +1,22 @@
+//Source this file with:
+//   source("src/org/ecberkeley/css/plots/example.bsh");
+
+addClassPath("out");
+addClassPath("lib/jmatharray.jar");
+addClassPath("lib/jmathplot.jar");
+
+import  org.ecberkeley.css.plots.GridPlotsExample;
+
+g = new GridPlotsExample();
+ 
+double[] x = org.math.array.DoubleArray.increment(0.0, 0.1, 1.0);
+double[] y = org.math.array.DoubleArray.increment(0.0, 0.05, 1.0);
+double[][] z1 = GridPlotsExample.f1(x, y);
+double[][] z2 = GridPlotsExample.f2(x, y);
+g.getPlot().addGridPlot("z=0.5*cos(PI*x)*3*sin(PI*y)", x, y, z1);
+
+void plot2(){
+	g.getPlot().removeAllPlots();
+	g.getPlot().addGridPlot("z=cos(PI*x)*sin(PI*y)", x, y, z1);
+	g.getPlot().addGridPlot("z=sin(PI*x)*cos(PI*y)", x, y, z2);
+}

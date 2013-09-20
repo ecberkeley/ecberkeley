@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″ />
+    <!--  Copyright (c) 2012 Laramie Crocker, http://LaramieCrocker.com
+     This project  is licensed under the GNU Affero General Public License.  
+     You may read the software license file, called LICENSE.txt, in the project distribution.
+    -->
+    <title>Logger Self-Test</title>
+    <!-- jQuery main package -->
+    <script src="js/jquery.1.7.1.min.js" type="text/javascript"></script>
+    <!-- jQuery UI effects package -->
+    <script src="js/jquery-ui-1.8.18.custom.js"></script> 
+    <script src="js/jquery.effects.core.js"></script>
+    <script src="js/jquery.effects.highlight.js"></script>
+    <script src="js/jquery.ui.core.js"></script>
+    
+    <!-- ============== my custom logger (show with 'l' key) ===================-->
+    <link rel="stylesheet" href="logger.css" type="text/css" media="all" />
+    <script src="logger.js" type="text/javascript"></script>
+    <!-- ============== main includes for this app ==========================-->
+    <link rel="stylesheet" href="widgets.css" type="text/css" media="all" /> <!-- custom widget stylings for buttons, instruments, and shadow boxes. -->
+    <!-- ============================================================-->
+</head>
+<body>
+
+<!--  =======  the logger ======== -->
+<div id="loggerWrapper" class="containerFloat">
+    <div id="logger" class="instrument blindfonts"> 
+    <div class="stylee">
+        <ul>
+        </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+$(function() {
+    loggerSelfTest();
+});
+</script>
+
+</body>
+</html>

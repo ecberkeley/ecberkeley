@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ecberkeley" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+    <include name="*.war"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.lib.classpath">
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module ecberkeley -->
+  
+  <dirname property="module.ecberkeley.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.ecberkeley" value="${compiler.args}"/>
+  
+  <property name="ecberkeley.output.dir" value="${module.ecberkeley.basedir}/out"/>
+  <property name="ecberkeley.testoutput.dir" value="${module.ecberkeley.basedir}/out-test"/>
+  
+  <path id="ecberkeley.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ecberkeley.module.production.classpath">
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="ecberkeley.runtime.production.module.classpath">
+    <pathelement location="${ecberkeley.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="ecberkeley.module.classpath">
+    <pathelement location="${ecberkeley.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="ecberkeley.runtime.module.classpath">
+    <pathelement location="${ecberkeley.testoutput.dir}"/>
+    <pathelement location="${ecberkeley.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ecberkeley">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ecberkeley">
+    <patternset refid="excluded.from.module.ecberkeley"/>
+  </patternset>
+  
+  <path id="ecberkeley.module.sourcepath">
+    <dirset dir="${module.ecberkeley.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ecberkeley" depends="compile.module.ecberkeley.production,compile.module.ecberkeley.tests" description="Compile module ecberkeley"/>
+  
+  <target name="compile.module.ecberkeley.production" description="Compile module ecberkeley; production classes">
+    <mkdir dir="${ecberkeley.output.dir}"/>
+    <javac destdir="${ecberkeley.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.ecberkeley}"/>
+      <bootclasspath refid="ecberkeley.module.bootclasspath"/>
+      <classpath refid="ecberkeley.module.production.classpath"/>
+      <src refid="ecberkeley.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ecberkeley"/>
+    </javac>
+    
+    <copy todir="${ecberkeley.output.dir}">
+      <fileset dir="${module.ecberkeley.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ecberkeley.tests" depends="compile.module.ecberkeley.production" description="compile module ecberkeley; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ecberkeley" description="cleanup module">
+    <delete dir="${ecberkeley.output.dir}"/>
+    <delete dir="${ecberkeley.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.ecberkeley" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.ecberkeley" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>

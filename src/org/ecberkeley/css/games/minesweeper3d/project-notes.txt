@@ -1,0 +1,20 @@
+Moved all source to svn repo here: 
+      ~/src/ecberkeley/src/org/ecberkeley/css/games
+   but source also needs to be developed in 
+      /Users/laramie/doc.lar/projects/charlie/tapes/dynamide/build/ROOT/homes/dynamide/assemblies/com-dynamide-apps-1/apps/tagonomy/resources/static/minesweeper3d/
+   so that we can run under a real web server.
+   
+To update, go here:
+    ~/src/ecberkeley/src/org/ecberkeley/css/games
+and do 
+    ./pull.bash
+    svn update minesweeper3d/
+    svn commit minesweeper3d/
+    
+To pack a zip of source, without ant, just do: 
+   cd  ~/src/ecberkeley/src/org/ecberkeley/css/games/minesweeper3d
+   rm minesweeper3d.zip; find . |grep -v '.svn' | zip minesweeper3d.zip -@
+   
+   All of this is done in 
+       ~/src/ecberkeley/src/org/ecberkeley/css/games/pull.bash
+   

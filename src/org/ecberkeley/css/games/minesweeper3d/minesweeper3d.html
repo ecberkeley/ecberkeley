@@ -1,0 +1,152 @@
+<html>
+<head>
+<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″ />
+    <!--  Copyright (c) 2012 Laramie Crocker, http://LaramieCrocker.com
+     This project  is licensed under the GNU Affero General Public License.  
+     You may read the software license file, called LICENSE.txt, in the project distribution.
+    -->
+    <title>Minesweeper 3D!</title>
+    <!-- jQuery main package -->
+    <script src="js/jquery.1.7.1.min.js" type="text/javascript"></script>
+    <!-- jQuery UI effects package -->
+    <script src="js/jquery-ui-1.8.18.custom.js"></script> 
+    <script src="js/jquery.effects.core.js"></script>
+    <script src="js/jquery.effects.highlight.js"></script>
+    <script src="js/jquery.ui.core.js"></script>
+    
+    <!-- ============== my custom logger (show with 'l' key) ===================-->
+    <link rel="stylesheet" href="logger.css" type="text/css" media="all" />
+    <script src="logger.js" type="text/javascript"></script>
+    <!-- ============== main includes for this app ==========================-->
+    <link rel="stylesheet" href="widgets.css" type="text/css" media="all" /> <!-- custom widget stylings for buttons, instruments, and shadow boxes. -->
+    <link rel="stylesheet" href="minesweeper3d.css" type="text/css" media="all" /> <!-- style and positioning for page. -->
+    <script src="minesweeper3d.js" type="text/javascript"></script><!-- main jQuery document on load event is in here. -->
+    <!-- ============================================================-->
+</head>
+<body>
+
+<!--  =======  the logger ======== -->
+<div id="loggerWrapper" class="containerFloat">
+    <div id="logger" class="instrument blindfonts"> 
+    <div class="stylee">
+        <ul>
+        </ul>
+        </div>
+    </div>
+</div>
+
+<!--  =======  the big floating area that contains the whole game ======== -->
+<span class="instrument shadow2" id="GamePad">
+    <div class='title' style="float: left">Minesweeper<br /><span class="big">3D!</span></div>
+    
+    <!--  =======  the scoreboard ======== -->
+    <span class="instrument shadow3" style="float: right">
+        <table border='0' cellpadding='0' cellspacing='0'>
+          <tr>
+            <td class="scoreHdr">bombs</td>
+            <td class="scoreHdr">score</td>
+            <td class="scoreHdr">high</td>
+            <td class="scoreHdr">W/L</td>
+          </tr>
+          <tr>
+            <td class="score"><input type="text" class="miniEdit" size="3" value="10" id="bombCount" readonly="readonly" /></td>
+            <td class="score" id='scoreHits'>00</td>
+            <td class="score" id='scoreHigh'>00</td>
+            <td class="score" id='scoreWinsLosses'>0/0</td>
+          </tr>
+        </table>
+    </span>
+    
+    <br />  <!--  =======  the action "buttons" ======== -->
+    <div style="clear: both">
+        <span class='instrument shadow3 pointer' id="showOptions"><span class="menuKeyLetter">O</span>ptions</span>
+        <span class='instrument shadow3  pointer' id="newGame"><span class="menuKeyLetter">N</span>ew Game</span>
+        <span class='instrument shadow3  pointer' id="swapLayers"><span class="menuKeyLetter">S</span>huffle</span>
+        <span class='instrument shadow3  pointer' id="btnHelp"><span class="menuKeyLetter">H</span>elp</span>
+    </div>
+    
+    <!--  =======  the optionsPanel, which is shown with the "o" key ======== -->
+    <div id="optionsPanel" class="optionsPanel shadow2 instrument">
+            <form>
+        
+            <label for="level">Level:</label>
+            <select id="level">
+                <option value='1' selected='true'>1</option>
+                <option value='2' >2</option>
+                <option value='3' >3</option>
+                <option value='4' >4</option>
+                <option value='5' >5</option>
+            </select>
+        
+            <br />
+            <label for="selLayer">Layers:</label>
+            <select id="selLayer">
+                <option value='1' >1</option>
+                <option value='2' >2</option>
+                <option value='3' selected='true'>3</option>
+                <option value='4' >4</option>
+                <option value='5' >5</option>
+                <option value='6' >6</option>
+                <option value='7' >7</option>
+                <option value='8' >8</option>
+            </select>
+        
+            <br />
+            Grid Size: <input type="text" name="editGRIDSIZE" id="editGRIDSIZE" size='3' value="8" />
+            <br />
+            <label for="ckTraining"> <span class="menuKeyLetter">T</span>raining Mode:</label><input id="ckTraining" name="ckTraining" type="checkbox" checked="checked" />
+        
+            <br />
+            <label for="ck3D"> 3D Mode:</label><input id="ck3D" name="ck3D" type="checkbox" checked="checked" />
+        
+            <br />
+            <center><span class='instrument shadow3 menuKeyLetter pointer' id="hideOptions">OK</span></center>
+            </form>
+    </div>
+    
+    
+    <!--  =======  the smiley box, floats over whole game when you win, lose, or cheat. ======== -->
+    <br />
+    <span id="smiley" class="smiley"><span class="big">;=)</span><br />Winning!</span>
+    
+    <!--  =======  the container for the gameTable elements, both main and 3D alternate layers. ======== -->
+    <div style="position: relative;" id="relBox">     
+        <br style="margin-bottom: 100px" />
+    </div>
+    
+    <!--  =======  the Help box, hidden until 'h' key. ======== -->
+    <span id="helpDialog" class="instrument shadow2" title="Help">
+        <h2>Rules of the game</h2> <hr />
+        <p>Click a tile, it either blows up, in which case game is over and you can't click any more, 
+                or it doesn't, in which case you can keep clicking.  There is no "validate" button, because the 
+                game is "sudden death."  Once you click all the non-bombs, the game instantly declares that you won,
+                and updates high-score, and prevents you from clicking cells.  All un-clicked bombs are displayed in blue; clicked bombs in red; safe cells in green.</p>
+        <p>Pressing "New Game" before any bombs go off will not affect your score.<p>
+        <p>To validate game logic, or to learn how to play, click "Training Mode" before starting a game.
+                This will show bombs in a highlight color.</p>
+        <p>To play in 3D, check "3D Mode," which will create additional layers (not necessarily cubic). To see these layers, click "Swap".</p>
+        <p>You can swap layers by using the Shuffle button, or the <span class="menuKeyLetter shadow3">S</span> key, or by mousing over the 3D deck of "other" layers, 
+              and clicking on one of those layers.</p>
+        <p>Any letter that looks like (<span class="menuKeyLetter shadow3">A</span>) is a shortcut key, which you can press on your keyboard instead of clicking.</p>
+        <p>Pressing the <span class="menuKeyLetter shadow3">H</span> key will show/hide the help dialog.</p>
+        <p>Pressing the <span class="menuKeyLetter shadow3">O</span> key will show/hide the options dialog.
+        Dismiss the options dialog with  <span class="menuKeyLetter shadow3">O</span>,  
+                                                        <span class="menuKeyLetter shadow3">ESC</span>, or
+                                                        <span class="menuKeyLetter shadow3">ENTER</span>.  All of these have the same effect. </p>
+        <p>Pressing the <span class="menuKeyLetter shadow3">ESC</span> key will dismiss any Help or Options dialogs.</p>
+        <p>To cheat, press <span class="menuKeyLetter shadow3">SHIFT</span> key while clicking, or inspect log for bomb locations. (Show/hide the log by pressing the <span class="menuKeyLetter shadow3">l</span> key.)</p>
+        <br />
+        <hr />
+        <p>Copyright (c) 2012 Laramie Crocker  ( <a href="http://LaramieCrocker.com">http://LaramieCrocker.com</a>
+        and <a href="http://ecBerkeley.org">http://ecBerkeley.org</a>. 
+     This project  is licensed under the GNU Affero General Public License.  
+     You may read the software license in the project distribution called <a href="LICENSE.txt">LICENSE.txt</a> 
+     or here: <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses</a>
+     Source files may be downloaded from  <a href="http://ecberkeley.svn.sourceforge.net/viewvc/ecberkeley/src/org/ecberkeley/css/games/minesweeper3d">ecBerkeley's SourceForge</a> repository.
+ </p>
+    </span>
+    
+</span> <!-- END gamePad span -->
+
+</body>
+</html>
